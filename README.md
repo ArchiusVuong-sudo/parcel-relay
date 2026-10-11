@@ -17,7 +17,7 @@ Full video: https://github.com/ArchiusVuong-sudo/parcel-relay/releases/download/
 ## Architecture
 
 ```mermaid
-flowchart LR
+flowchart TB
   Mailbox[Synthetic supplier mailbox] --> Sync[Inbox sync in the Fastify process]
   Sync --> Blob[Raw email store, keyed by content hash]
   Sync --> Known{Known supplier?}

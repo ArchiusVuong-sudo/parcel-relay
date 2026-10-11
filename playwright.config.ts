@@ -1,10 +1,9 @@
-import { mkdtempSync } from 'node:fs';
-import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { defineConfig } from '@playwright/test';
 
 const port = Number(process.env.PORT ?? 4115);
-const dataDir = mkdtempSync(join(tmpdir(), 'parcel-relay-e2e-'));
+// Inside the gitignored data/ folder; the test starts with Reset demo, so old state does not matter.
+const dataDir = join(import.meta.dirname, 'data', 'e2e');
 
 export default defineConfig({
   testDir: 'tests/e2e',

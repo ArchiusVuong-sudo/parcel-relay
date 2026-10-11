@@ -1,0 +1,150 @@
+{
+  "label": "Recorded from a live run",
+  "recordedAt": "2026-10-11T04:12:46.192Z",
+  "model": "claude-sonnet-5-5",
+  "emailSha256": "966d1b409a3fba3bd22c4369b70877659736764f51da9edd2ca06a13e8e7d49a",
+  "durationMs": 12103,
+  "costUsd": 0.032394599999999996,
+  "numTurns": 4,
+  "attempts": 1,
+  "output": {
+    "fields": {
+      "tracking_number": "KP512093445ZZ",
+      "carrier": "Kestrelpost",
+      "buyer_name": "Ilse Varga",
+      "street": "7 Copperbeech Row",
+      "postal_code": "40517",
+      "items": "Wooden stacking rings"
+    },
+    "confidence": 0.9,
+    "template": {
+      "flags": "im",
+      "patterns": {
+        "tracking_number": "Tracking ref\\s*\\.*\\s*([A-Z0-9]+)",
+        "carrier": "Courier\\s*\\.+\\s*([^\\r\\n]+?)\\s*$",
+        "buyer_name": "Ship to\\s*\\.+\\s*([^\\r\\n]+?)\\s*$",
+        "street": "Address\\s*\\.+\\s*([^\\r\\n]+?)\\s*$",
+        "postal_code": "Postcode\\s*\\.+\\s*(\\d{5})",
+        "items": "Contents\\s*\\.+\\s*([^\\r\\n]+?)\\s*$"
+      }
+    },
+    "notes": "All six fields passed on the second test (the first failed because the m flag was missing). The tracking number fits the Kestrelpost S10 format (KP, 9 digits, ZZ)."
+  },
+  "trace": [
+    {
+      "kind": "prompt",
+      "label": "Prompt sent to claude-sonnet-5-5",
+      "atMs": 0,
+      "detail": {
+        "maxTurns": 6,
+        "tools": [
+          "mcp__parcel_relay__test_template"
+        ]
+      }
+    },
+    {
+      "kind": "tool_call",
+      "label": "Model called test_template",
+      "atMs": 4644,
+      "detail": {
+        "fields": {
+          "tracking_number": "KP512093445ZZ",
+          "carrier": "Kestrelpost",
+          "buyer_name": "Ilse Varga",
+          "street": "7 Copperbeech Row",
+          "postal_code": "40517",
+          "items": "Wooden stacking rings"
+        },
+        "flags": "i",
+        "patterns": {
+          "tracking_number": "Tracking ref\\s*\\.*\\s*([A-Z0-9]+)",
+          "carrier": "Courier\\s*\\.+\\s*([^\\r\\n]+?)\\s*$",
+          "buyer_name": "Ship to\\s*\\.+\\s*([^\\r\\n]+?)\\s*$",
+          "street": "Address\\s*\\.+\\s*([^\\r\\n]+?)\\s*$",
+          "postal_code": "Postcode\\s*\\.+\\s*(\\d{5})",
+          "items": "Contents\\s*\\.+\\s*([^\\r\\n]+?)\\s*$"
+        }
+      }
+    },
+    {
+      "kind": "tool_result",
+      "label": "test_template #1: failed",
+      "atMs": 4656,
+      "detail": {
+        "passed": false,
+        "summary": "4 of 6 fields failed: carrier, buyer_name, street, items"
+      }
+    },
+    {
+      "kind": "tool_call",
+      "label": "Model called test_template",
+      "atMs": 7921,
+      "detail": {
+        "fields": {
+          "tracking_number": "KP512093445ZZ",
+          "carrier": "Kestrelpost",
+          "buyer_name": "Ilse Varga",
+          "street": "7 Copperbeech Row",
+          "postal_code": "40517",
+          "items": "Wooden stacking rings"
+        },
+        "flags": "im",
+        "patterns": {
+          "tracking_number": "Tracking ref\\s*\\.*\\s*([A-Z0-9]+)",
+          "carrier": "Courier\\s*\\.+\\s*([^\\r\\n]+?)\\s*$",
+          "buyer_name": "Ship to\\s*\\.+\\s*([^\\r\\n]+?)\\s*$",
+          "street": "Address\\s*\\.+\\s*([^\\r\\n]+?)\\s*$",
+          "postal_code": "Postcode\\s*\\.+\\s*(\\d{5})",
+          "items": "Contents\\s*\\.+\\s*([^\\r\\n]+?)\\s*$"
+        }
+      }
+    },
+    {
+      "kind": "tool_result",
+      "label": "test_template #2: passed",
+      "atMs": 7934,
+      "detail": {
+        "passed": true,
+        "summary": "All 6 fields extracted and guard checks passed"
+      }
+    },
+    {
+      "kind": "tool_call",
+      "label": "Model called StructuredOutput",
+      "atMs": 11560,
+      "detail": {
+        "fields": {
+          "tracking_number": "KP512093445ZZ",
+          "carrier": "Kestrelpost",
+          "buyer_name": "Ilse Varga",
+          "street": "7 Copperbeech Row",
+          "postal_code": "40517",
+          "items": "Wooden stacking rings"
+        },
+        "confidence": 0.9,
+        "template": {
+          "flags": "im",
+          "patterns": {
+            "tracking_number": "Tracking ref\\s*\\.*\\s*([A-Z0-9]+)",
+            "carrier": "Courier\\s*\\.+\\s*([^\\r\\n]+?)\\s*$",
+            "buyer_name": "Ship to\\s*\\.+\\s*([^\\r\\n]+?)\\s*$",
+            "street": "Address\\s*\\.+\\s*([^\\r\\n]+?)\\s*$",
+            "postal_code": "Postcode\\s*\\.+\\s*(\\d{5})",
+            "items": "Contents\\s*\\.+\\s*([^\\r\\n]+?)\\s*$"
+          }
+        },
+        "notes": "All six fields passed on the second test (the first failed because the m flag was missing). The tracking number fits the Kestrelpost S10 format (KP, 9 digits, ZZ)."
+      }
+    },
+    {
+      "kind": "schema_check",
+      "label": "Structured output matches the schema",
+      "atMs": 12103
+    },
+    {
+      "kind": "output",
+      "label": "Draft returned, confidence 0.9",
+      "atMs": 12103
+    }
+  ]
+}

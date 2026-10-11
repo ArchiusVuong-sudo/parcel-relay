@@ -29,5 +29,19 @@
     "typescript": "^5.9.3",
     "vite": "^8.3.4",
     "vitest": "^5.0.3"
+  },
+  "description": "Turns supplier shipping emails into validated tracking uploads on the right marketplace orders.",
+  "scripts": {
+    "build": "npm run build:web && npm run build:server",
+    "build:web": "vite build",
+    "build:server": "tsc -p tsconfig.server.json",
+    "start": "npm run build && node dist/server/main.js",
+    "serve": "node dist/server/main.js",
+    "typecheck": "tsc -p tsconfig.server.json --noEmit && tsc -p tsconfig.web.json --noEmit && tsc -p tsconfig.test.json --noEmit",
+    "test": "vitest run",
+    "test:e2e": "playwright test",
+    "test:live": "LIVE=1 vitest run tests/live",
+    "smoke": "tsx scripts/smoke.ts",
+    "record-fixture": "tsx scripts/record-fixture.ts"
   }
 }

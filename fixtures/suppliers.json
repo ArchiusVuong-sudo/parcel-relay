@@ -1,0 +1,53 @@
+{
+  "note": "Synthetic suppliers. The first three have seeded rule templates in three layouts. The fourth is unknown on purpose: the app has no template for it.",
+  "suppliers": [
+    {
+      "name": "Quillmoor Home",
+      "senderDomain": "quillmoor.example.com",
+      "layout": "plain text",
+      "template": {
+        "flags": "i",
+        "patterns": {
+          "tracking_number": "Tracking number:\\s*([A-Z0-9]+)",
+          "carrier": "Shipped via ([^\\n]+)",
+          "buyer_name": "Customer:\\s*([^\\n]+)",
+          "street": "Deliver to:\\s*([^,\\n]+),",
+          "postal_code": "Deliver to:[^\\n]*?(\\d{5})",
+          "items": "Products:\\s*([^\\n]+)"
+        }
+      }
+    },
+    {
+      "name": "Ashgrove Outfitters",
+      "senderDomain": "ashgrove.example.com",
+      "layout": "HTML table",
+      "template": {
+        "flags": "i",
+        "patterns": {
+          "tracking_number": "<th>Tracking</th>\\s*<td>([^<]+)</td>",
+          "carrier": "<th>Carrier</th>\\s*<td>([^<]+)</td>",
+          "buyer_name": "<th>Recipient</th>\\s*<td>([^<]+)</td>",
+          "street": "<th>Street</th>\\s*<td>([^<]+)</td>",
+          "postal_code": "<th>Postal code</th>\\s*<td>([^<]+)</td>",
+          "items": "<th>Items</th>\\s*<td>([^<]+)</td>"
+        }
+      }
+    },
+    {
+      "name": "Pellbrook Kitchen",
+      "senderDomain": "pellbrook.example.com",
+      "layout": "tracking inside a link",
+      "template": {
+        "flags": "i",
+        "patterns": {
+          "tracking_number": "href=\"[^\"]*[?&](?:amp;)?n=([A-Z0-9]+)\"",
+          "carrier": "Shipped with ([^.<]+)\\.",
+          "buyer_name": "Packed for <b>([^<]+)</b>",
+          "street": "</b>,\\s*([^,<]+),",
+          "postal_code": "</b>,[^<]*?(\\d{5})",
+          "items": "In the box:\\s*([^<]+)</p>"
+        }
+      }
+    }
+  ]
+}

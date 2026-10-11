@@ -1,0 +1,101 @@
+{
+  "note": "Simulated carrier scans, seeded per tracking number. Days count from the day the tracking was uploaded.",
+  "scans": [
+    {
+      "tracking": "KP407318267ZZ",
+      "daysAfterUpload": 1,
+      "status": "in_transit",
+      "location": "Kestrelpost sorting hub, Marrowby"
+    },
+    {
+      "tracking": "KP407318267ZZ",
+      "daysAfterUpload": 2,
+      "status": "delivered",
+      "location": "Brindlemoor, left at front door"
+    },
+    {
+      "tracking": "003840217755003120",
+      "daysAfterUpload": 1,
+      "status": "in_transit",
+      "location": "Tidelane Ground depot, Quellston"
+    },
+    {
+      "tracking": "003840217755003120",
+      "daysAfterUpload": 2,
+      "status": "delivered",
+      "location": "Marrowby, left at front door"
+    },
+    {
+      "tracking": "SX702155380463",
+      "daysAfterUpload": 1,
+      "status": "in_transit",
+      "location": "Swiftmere Express hub, Fennick"
+    },
+    {
+      "tracking": "SX702155380463",
+      "daysAfterUpload": 2,
+      "status": "delivered",
+      "location": "Larkhollow, left at front door"
+    },
+    {
+      "tracking": "003840217755004196",
+      "daysAfterUpload": 1,
+      "status": "in_transit",
+      "location": "Tidelane Ground depot, Quellston"
+    },
+    {
+      "tracking": "003840217755004196",
+      "daysAfterUpload": 2,
+      "status": "delivered",
+      "location": "Fennick, left at front door"
+    },
+    {
+      "tracking": "KP407319072ZZ",
+      "daysAfterUpload": 1,
+      "status": "in_transit",
+      "location": "Kestrelpost sorting hub, Marrowby"
+    },
+    {
+      "tracking": "KP407319072ZZ",
+      "daysAfterUpload": 2,
+      "status": "delivered",
+      "location": "Marrowby, left at front door"
+    },
+    {
+      "tracking": "SX702155382113",
+      "daysAfterUpload": 1,
+      "status": "in_transit",
+      "location": "Swiftmere Express hub, Fennick"
+    },
+    {
+      "tracking": "SX702155382113",
+      "daysAfterUpload": 2,
+      "status": "delivered",
+      "location": "Larkhollow, left at front door"
+    },
+    {
+      "tracking": "KP512093445ZZ",
+      "daysAfterUpload": 1,
+      "status": "in_transit",
+      "location": "Kestrelpost sorting hub, Marrowby"
+    },
+    {
+      "tracking": "KP512093445ZZ",
+      "daysAfterUpload": 2,
+      "status": "delivered",
+      "location": "Wrenfield, left at front door"
+    },
+    {
+      "tracking": "SX702155391205",
+      "daysAfterUpload": 1,
+      "status": "in_transit",
+      "location": "Swiftmere Express hub, Fennick"
+    },
+    {
+      "tracking": "SX702155391205",
+      "daysAfterUpload": 2,
+      "status": "delivered",
+      "location": "Wrenfield, left at front door"
+    }
+  ]
+}

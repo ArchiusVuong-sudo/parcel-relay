@@ -1,0 +1,117 @@
+{
+  "note": "Synthetic supplier mailbox. Every sender, buyer and tracking number is invented. One batch per Sync inbox click.",
+  "batches": [
+    {
+      "batch": 1,
+      "emails": [
+        {
+          "messageId": "<b1-1@quillmoor.example.com>",
+          "from": "dispatch@quillmoor.example.com",
+          "fromName": "Quillmoor Home",
+          "subject": "Dispatched: order QH-88120",
+          "contentType": "text/plain",
+          "body": "Order dispatched - Quillmoor Home\n\nYour order QH-88120 has left our warehouse.\n\nCustomer: Maren Holloway\nDeliver to: 14 Larkspur Lane, 40311 Brindlemoor\nProducts: Linen cushion cover x2\nShipped via Kestrelpost\nTracking number: KP407318267ZZ\n\nQuillmoor Home dispatch team\n(synthetic email)\n"
+        },
+        {
+          "messageId": "<b1-2@ashgrove.example.com>",
+          "from": "orders@ashgrove.example.com",
+          "fromName": "Ashgrove Outfitters",
+          "subject": "Shipment confirmation AO-5531",
+          "contentType": "text/html",
+          "body": "<html><body>\n<p>Hello, the order below has shipped from Ashgrove Outfitters.</p>\n<table class=\"shipment\">\n<tr><th>Reference</th><td>AO-5531</td></tr>\n<tr><th>Recipient</th><td>Imara Castellan</td></tr>\n<tr><th>Street</th><td>88 Gullhaven Rd</td></tr>\n<tr><th>Postal code</th><td>40522</td></tr>\n<tr><th>Town</th><td>Marrowby</td></tr>\n<tr><th>Items</th><td>Trail daypack 22 L</td></tr>\n<tr><th>Carrier</th><td>Tidelane Ground</td></tr>\n<tr><th>Tracking</th><td>003840217755003120</td></tr>\n</table>\n<p>Ashgrove Outfitters fulfilment (synthetic email)</p>\n</body></html>\n"
+        },
+        {
+          "messageId": "<b1-3@pellbrook.example.com>",
+          "from": "hello@pellbrook.example.com",
+          "fromName": "Pellbrook Kitchen",
+          "subject": "Pellbrook parcel PK-2207 shipped",
+          "contentType": "text/html",
+          "body": "<html><body>\n<h2>Your Pellbrook Kitchen parcel is on its way</h2>\n<p>Packed for <b>Saoirse Pennick</b>, 41 Kiln Street, 40714 Larkhollow.</p>\n<p>In the box: Cast iron skillet</p>\n<p>Shipped with Swiftmere Express. <a href=\"https://pellbrook.example.com/track?carrier=swiftmere&amp;n=SX702155380463\">Track your parcel</a></p>\n<p>Pellbrook Kitchen (synthetic email)</p>\n</body></html>\n"
+        },
+        {
+          "messageId": "<b1-4@ashgrove.example.com>",
+          "from": "orders@ashgrove.example.com",
+          "fromName": "Ashgrove Outfitters",
+          "subject": "Shipment confirmation AO-5536",
+          "contentType": "text/html",
+          "body": "<html><body>\n<p>Hello, the order below has shipped from Ashgrove Outfitters.</p>\n<table class=\"shipment\">\n<tr><th>Reference</th><td>AO-5536</td></tr>\n<tr><th>Recipient</th><td>Linnea Marchetti</td></tr>\n<tr><th>Street</th><td>22 Fernhill Road</td></tr>\n<tr><th>Postal code</th><td>40421</td></tr>\n<tr><th>Town</th><td>Fennick</td></tr>\n<tr><th>Items</th><td>Merino beanie</td></tr>\n<tr><th>Carrier</th><td>Tidelane Ground</td></tr>\n<tr><th>Tracking</th><td>003840217755004196</td></tr>\n</table>\n<p>Ashgrove Outfitters fulfilment (synthetic email)</p>\n</body></html>\n"
+        }
+      ],
+      "label": "Four emails from known suppliers"
+    },
+    {
+      "batch": 2,
+      "emails": [
+        {
+          "messageId": "<b2-1@ashgrove.example.com>",
+          "from": "orders@ashgrove.example.com",
+          "fromName": "Ashgrove Outfitters",
+          "subject": "Shipment confirmation AO-5540",
+          "contentType": "text/html",
+          "body": "<html><body>\n<p>Hello, the order below has shipped from Ashgrove Outfitters.</p>\n<table class=\"shipment\">\n<tr><th>Reference</th><td>AO-5540</td></tr>\n<tr><th>Recipient</th><td>Yusra Belcourt</td></tr>\n<tr><th>Street</th><td>60 Heronsgate</td></tr>\n<tr><th>Postal code</th><td>40633</td></tr>\n<tr><th>Town</th><td>Quellston</td></tr>\n<tr><th>Items</th><td>Rain shell jacket</td></tr>\n<tr><th>Carrier</th><td>Tidelane Ground</td></tr>\n<tr><th>Tracking</th><td>003840217755006278</td></tr>\n</table>\n<p>Ashgrove Outfitters fulfilment (synthetic email)</p>\n</body></html>\n"
+        },
+        {
+          "messageId": "<b2-2@quillmoor.example.com>",
+          "from": "dispatch@quillmoor.example.com",
+          "fromName": "Quillmoor Home",
+          "subject": "Dispatched: order QH-88131",
+          "contentType": "text/plain",
+          "body": "Order dispatched - Quillmoor Home\n\nYour order QH-88131 has left our warehouse.\n\nCustomer: Hollis Varden\nDeliver to: 31 Chapel Brow, 40425 Fennick\nProducts: Ceramic table lamp\nShipped via Quillmoor Courier\nTracking number: QC204118839\n\nQuillmoor Home dispatch team\n(synthetic email)\n"
+        },
+        {
+          "messageId": "<b2-3@pellbrook.example.com>",
+          "from": "hello@pellbrook.example.com",
+          "fromName": "Pellbrook Kitchen",
+          "subject": "Resent: Pellbrook parcel PK-2207 shipped",
+          "contentType": "text/html",
+          "body": "<html><body>\n<h2>Your Pellbrook Kitchen parcel is on its way</h2>\n<p>Packed for <b>Saoirse Pennick</b>, 41 Kiln Street, 40714 Larkhollow.</p>\n<p>In the box: Cast iron skillet</p>\n<p>Shipped with Swiftmere Express. <a href=\"https://pellbrook.example.com/track?carrier=swiftmere&amp;n=SX702155380463\">Track your parcel</a></p>\n<p>Pellbrook Kitchen (synthetic email)</p>\n</body></html>\n"
+        },
+        {
+          "messageId": "<b2-4@quillmoor.example.com>",
+          "from": "dispatch@quillmoor.example.com",
+          "fromName": "Quillmoor Home",
+          "subject": "Dispatched: order QH-88134",
+          "contentType": "text/plain",
+          "body": "Order dispatched - Quillmoor Home\n\nYour order QH-88134 has left our warehouse.\n\nCustomer: Priya Thornwell\nDeliver to: 77 Bellfounder Street, 40531 Marrowby\nProducts: Jute doormat\nShipped via Kestrelpost\nTracking number: KP407319072ZZ\n\nQuillmoor Home dispatch team\n(synthetic email)\n"
+        },
+        {
+          "messageId": "<b2-5@pellbrook.example.com>",
+          "from": "hello@pellbrook.example.com",
+          "fromName": "Pellbrook Kitchen",
+          "subject": "Pellbrook parcel PK-2215 shipped",
+          "contentType": "text/html",
+          "body": "<html><body>\n<h2>Your Pellbrook Kitchen parcel is on its way</h2>\n<p>Packed for <b>Odile Pemberton</b>, 19 Rookery Lane, 40722 Larkhollow.</p>\n<p>In the box: Enamel tableware (2 pcs)</p>\n<p>Shipped with Swiftmere Express. <a href=\"https://pellbrook.example.com/track?carrier=swiftmere&amp;n=SX702155382113\">Track your parcel</a></p>\n<p>Pellbrook Kitchen (synthetic email)</p>\n</body></html>\n"
+        }
+      ],
+      "label": "Edge cases: mistyped number, courier not accepted, resent email, cancelled order, repeat buyer"
+    },
+    {
+      "batch": 3,
+      "emails": [
+        {
+          "messageId": "<b3-1@fernwhistle.example.com>",
+          "from": "workshop@fernwhistle.example.com",
+          "fromName": "Fernwhistle Toys",
+          "subject": "A parcel is on its way",
+          "contentType": "text/plain",
+          "body": "Hi there,\n\nA Fernwhistle parcel left our workshop today.\n\nShip to ...... Ilse Varga\nAddress ...... 7 Copperbeech Row\nPostcode ..... 40517 Wrenfield\nContents ..... Wooden stacking rings\nCourier ...... Kestrelpost\nTracking ref . KP512093445ZZ\n\nFernwhistle Toys, dispatch desk\n(synthetic email)\n"
+        }
+      ],
+      "label": "First email from an unknown supplier"
+    },
+    {
+      "batch": 4,
+      "emails": [
+        {
+          "messageId": "<b4-1@fernwhistle.example.com>",
+          "from": "workshop@fernwhistle.example.com",
+          "fromName": "Fernwhistle Toys",
+          "subject": "A parcel is on its way",
+          "contentType": "text/plain",
+          "body": "Hi there,\n\nA Fernwhistle parcel left our workshop today.\n\nShip to ...... Corin Blackwood\nAddress ...... 63 Thistle Way\nPostcode ..... 40519 Wrenfield\nContents ..... Felt animal mobile\nCourier ...... Swiftmere Express\nTracking ref . SX702155391205\n\nFernwhistle Toys, dispatch desk\n(synthetic email)\n"
+        }
+      ],
+      "label": "Second email from that supplier"
+    }
+  ]
+}

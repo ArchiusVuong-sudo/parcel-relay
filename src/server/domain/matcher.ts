@@ -94,7 +94,7 @@ export function streetSimilarity(a: string, b: string): number {
 }
 
 export function itemWords(text: string): string[] {
-  return tokens(text).filter((t) => !STOPWORDS.has(t) && !/^\d+$/.test(t));
+  return tokens(text).filter((t) => !STOPWORDS.has(t) && !/^x?\d+x?$/.test(t));
 }
 
 /** Share of the email's item words found in the order's item titles. */

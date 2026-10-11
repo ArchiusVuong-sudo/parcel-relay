@@ -1,7 +1,9 @@
 const dateTime = new Intl.DateTimeFormat('en-GB', { weekday: 'short', day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' });
+const clock = new Intl.DateTimeFormat('en-GB', { weekday: 'short', hour: '2-digit', minute: '2-digit' });
 const time = new Intl.DateTimeFormat('en-GB', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
 
 export const fmtDateTime = (iso: string) => dateTime.format(new Date(iso));
+export const fmtClock = (iso: string) => clock.format(new Date(iso));
 export const fmtTime = (iso: string) => time.format(new Date(iso));
 export const fmtMs = (ms: number) => (ms >= 1000 ? `${(ms / 1000).toFixed(1)} s` : `${Math.round(ms)} ms`);
 export const fmtUsd = (usd: number | null) => (usd === null ? 'n/a' : `$${usd.toFixed(4)}`);

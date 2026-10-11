@@ -8,6 +8,8 @@ export interface Carrier {
   format: RegExp;
   formatHint: string;
   checkMethod: CheckMethod;
+  /** A valid synthetic number, used to test that templates are not tied to one carrier. */
+  example: string;
 }
 
 export const CARRIERS: readonly Carrier[] = [
@@ -18,6 +20,7 @@ export const CARRIERS: readonly Carrier[] = [
     format: /^[A-Z]{2}\d{9}[A-Z]{2}$/,
     formatHint: '2 letters, 9 digits, 2 letters (S10, last digit is the check digit)',
     checkMethod: 's10',
+    example: 'KP602184379ZZ',
   },
   {
     code: 'tidelane',
@@ -26,6 +29,7 @@ export const CARRIERS: readonly Carrier[] = [
     format: /^\d{18}$/,
     formatHint: '18 digits (GS1 mod-10 check digit at the end)',
     checkMethod: 'gs1_mod10',
+    example: '003840217755009016',
   },
   {
     code: 'swiftmere',
@@ -34,6 +38,7 @@ export const CARRIERS: readonly Carrier[] = [
     format: /^SX\d{12}$/,
     formatHint: '"SX" then 12 digits (Luhn check digit at the end)',
     checkMethod: 'luhn',
+    example: 'SX702155309777',
   },
   {
     code: 'quillmoor_courier',
@@ -42,6 +47,7 @@ export const CARRIERS: readonly Carrier[] = [
     format: /^QC\d{9}$/,
     formatHint: '"QC" then 9 digits (no check digit)',
     checkMethod: 'none',
+    example: 'QC100482736',
   },
 ];
 

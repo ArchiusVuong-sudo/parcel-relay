@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 import { api } from '../lib/api';
-import { fmtDateTime } from '../lib/format';
+import { fmtClock } from '../lib/format';
 import { useApi } from '../lib/live';
 import { href } from '../lib/router';
 import type { Meta, Overview } from '../lib/types';
@@ -106,7 +106,7 @@ function Topbar({ page, meta }: { page: string; meta: Meta | undefined }) {
         <div className="mr-1 flex items-center gap-1.5 rounded-lg bg-slate-100 px-2.5 py-1.5 text-xs text-slate-600" title="Simulated clock">
           <IconClock className="text-slate-400" size={14} />
           <span className="font-medium text-slate-700">Day {meta?.sim.day ?? 0}</span>
-          <span className="tabular-nums">{meta ? fmtDateTime(meta.sim.now) : ''}</span>
+          <span className="tabular-nums">{meta ? fmtClock(meta.sim.now) : ''}</span>
         </div>
         <div className="flex items-center rounded-lg bg-slate-100 p-0.5 text-xs" role="group" aria-label="Simulated marketplace mode">
           <span className="px-2 text-slate-500">Marketplace</span>
@@ -132,7 +132,7 @@ function Topbar({ page, meta }: { page: string; meta: Meta | undefined }) {
           <IconRotate size={14} /> Reset demo
         </Button>
         <Button variant="primary" onClick={() => sync.run()} busy={sync.busy || meta?.inbox.processing} disabled={inboxDone} title={meta?.inbox.nextLabel ?? 'Mailbox empty'}>
-          <IconRefresh size={14} />
+          {sync.busy || meta?.inbox.processing ? null : <IconRefresh size={14} />}
           {inboxDone ? 'Inbox empty' : `Sync inbox`}
           {!inboxDone && meta ? (
             <span className="rounded bg-white/20 px-1 text-[11px] tabular-nums">

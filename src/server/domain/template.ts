@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { CARRIERS } from './carriers.js';
 import { guardPattern, safeExec, type GuardIssue } from './regexGuard.js';
 
 /** The fields a supplier template pulls out of a shipping email. */
@@ -74,9 +75,18 @@ export interface FieldTest {
   issues: GuardIssue[];
 }
 
+export interface VariantTest {
+  carrier: string;
+  tracking: string;
+  pass: boolean;
+  got: { tracking_number: string | null; carrier: string | null };
+}
+
 export interface TemplateTest {
   passed: boolean;
   fields: FieldTest[];
+  /** The same email with each known carrier's name and number swapped in. */
+  variants: VariantTest[];
   summary: string;
 }
 
@@ -86,8 +96,25 @@ export function sameValue(a: string, b: string): boolean {
 }
 
 /**
+ * A supplier can ship with any carrier, so a template must not be tied to the format of
+ * the one number in its sample. Swap in each known carrier's name and example number and check both still come out.
+ */
+export function carrierVariants(spec: TemplateSpec, body: string, expected: Fields): VariantTest[] {
+  if (!expected.tracking_number || !body.includes(expected.tracking_number)) return [];
+  return CARRIERS.map((c) => {
+    let variant = body.split(expected.tracking_number).join(c.example);
+    if (expected.carrier && body.includes(expected.carrier)) variant = variant.split(expected.carrier).join(c.name);
+    const r = applyTemplate(spec, variant);
+    const got = { tracking_number: r.fields.tracking_number ?? null, carrier: r.fields.carrier ?? null };
+    const carrierOk = !body.includes(expected.carrier) || (got.carrier !== null && sameValue(got.carrier, c.name));
+    return { carrier: c.name, tracking: c.example, pass: got.tracking_number !== null && sameValue(got.tracking_number, c.example) && carrierOk, got };
+  });
+}
+
+/**
  * Tests a template against a sample email and the values a reader (or a model) found in it.
- * Every pattern must pass the guard, and must extract the expected value.
+ * Every pattern must pass the guard and extract the expected value, and the template must
+ * still work when the email names another carrier.
  * The carrier name is exempt from the sample-value rule: carriers are a closed list.
  */
 export function testTemplate(spec: TemplateSpec, body: string, expected: Fields): TemplateTest {
@@ -101,10 +128,17 @@ export function testTemplate(spec: TemplateSpec, body: string, expected: Fields)
     const pass = issues.length === 0 && got !== null && sameValue(got, expected[field]);
     return { field, expected: expected[field], got, pass, issues };
   });
+  const variants = carrierVariants(spec, body, expected);
   const failed = fields.filter((f) => !f.pass);
+  const badVariants = variants.filter((v) => !v.pass);
+  const problems = [
+    ...(failed.length ? [`${failed.length} of ${fields.length} fields failed: ${failed.map((f) => f.field).join(', ')}`] : []),
+    ...(badVariants.length ? [`tracking or carrier not found when the email names ${badVariants.map((v) => v.carrier).join(', ')}`] : []),
+  ];
   return {
-    passed: failed.length === 0,
+    passed: problems.length === 0,
     fields,
-    summary: failed.length === 0 ? `All ${fields.length} fields extracted and guard checks passed` : `${failed.length} of ${fields.length} fields failed: ${failed.map((f) => f.field).join(', ')}`,
+    variants,
+    summary: problems.length === 0 ? `All ${fields.length} fields extracted, guard checks passed, and ${variants.length} carrier variants parsed` : problems.join('; '),
   };
 }

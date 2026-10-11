@@ -1,10 +1,10 @@
 {
   "label": "Recorded from a live run",
-  "recordedAt": "2026-10-11T04:12:46.192Z",
+  "recordedAt": "2026-10-11T04:34:41.297Z",
   "model": "claude-sonnet-5-5",
   "emailSha256": "966d1b409a3fba3bd22c4369b70877659736764f51da9edd2ca06a13e8e7d49a",
-  "durationMs": 12103,
-  "costUsd": 0.032394599999999996,
+  "durationMs": 13173,
+  "costUsd": 0.0296888,
   "numTurns": 4,
   "attempts": 1,
   "output": {
@@ -20,15 +20,15 @@
     "template": {
       "flags": "im",
       "patterns": {
-        "tracking_number": "Tracking ref\\s*\\.*\\s*([A-Z0-9]+)",
-        "carrier": "Courier\\s*\\.+\\s*([^\\r\\n]+?)\\s*$",
-        "buyer_name": "Ship to\\s*\\.+\\s*([^\\r\\n]+?)\\s*$",
-        "street": "Address\\s*\\.+\\s*([^\\r\\n]+?)\\s*$",
-        "postal_code": "Postcode\\s*\\.+\\s*(\\d{5})",
-        "items": "Contents\\s*\\.+\\s*([^\\r\\n]+?)\\s*$"
+        "tracking_number": "^Tracking ref\\s*\\.*\\s*([A-Z]{2}\\d{9}[A-Z]{2}|\\d{18}|SX\\d{12}|QC\\d{9})\\b",
+        "carrier": "^Courier\\s*\\.+\\s*([^\\r\\n]+?)\\s*$",
+        "buyer_name": "^Ship to\\s*\\.+\\s*([^\\r\\n]+?)\\s*$",
+        "street": "^Address\\s*\\.+\\s*([^\\r\\n]+?)\\s*$",
+        "postal_code": "^Postcode\\s*\\.+\\s*(\\d{5})\\b",
+        "items": "^Contents\\s*\\.+\\s*([^\\r\\n]+?)\\s*$"
       }
     },
-    "notes": "All six fields passed on the second test (the first failed because the m flag was missing). The tracking number fits the Kestrelpost S10 format (KP, 9 digits, ZZ)."
+    "notes": "Label-anchored patterns using the im flags; the tracking pattern covers all four carrier formats. The second test passed, including all four carrier variants."
   },
   "trace": [
     {
@@ -45,7 +45,7 @@
     {
       "kind": "tool_call",
       "label": "Model called test_template",
-      "atMs": 4644,
+      "atMs": 4755,
       "detail": {
         "fields": {
           "tracking_number": "KP512093445ZZ",
@@ -57,11 +57,11 @@
         },
         "flags": "i",
         "patterns": {
-          "tracking_number": "Tracking ref\\s*\\.*\\s*([A-Z0-9]+)",
+          "tracking_number": "Tracking ref\\s*\\.*\\s*([A-Z]{2}\\d{9}[A-Z]{2}|\\d{18}|SX\\d{12}|QC\\d{9})\\b",
           "carrier": "Courier\\s*\\.+\\s*([^\\r\\n]+?)\\s*$",
           "buyer_name": "Ship to\\s*\\.+\\s*([^\\r\\n]+?)\\s*$",
           "street": "Address\\s*\\.+\\s*([^\\r\\n]+?)\\s*$",
-          "postal_code": "Postcode\\s*\\.+\\s*(\\d{5})",
+          "postal_code": "Postcode\\s*\\.+\\s*(\\d{5})\\b",
           "items": "Contents\\s*\\.+\\s*([^\\r\\n]+?)\\s*$"
         }
       }
@@ -69,16 +69,16 @@
     {
       "kind": "tool_result",
       "label": "test_template #1: failed",
-      "atMs": 4656,
+      "atMs": 4776,
       "detail": {
         "passed": false,
-        "summary": "4 of 6 fields failed: carrier, buyer_name, street, items"
+        "summary": "4 of 6 fields failed: carrier, buyer_name, street, items; tracking or carrier not found when the email names Kestrelpost, Tidelane Ground, Swiftmere Express, Quillmoor Courier"
       }
     },
     {
       "kind": "tool_call",
       "label": "Model called test_template",
-      "atMs": 7921,
+      "atMs": 8819,
       "detail": {
         "fields": {
           "tracking_number": "KP512093445ZZ",
@@ -90,28 +90,28 @@
         },
         "flags": "im",
         "patterns": {
-          "tracking_number": "Tracking ref\\s*\\.*\\s*([A-Z0-9]+)",
-          "carrier": "Courier\\s*\\.+\\s*([^\\r\\n]+?)\\s*$",
-          "buyer_name": "Ship to\\s*\\.+\\s*([^\\r\\n]+?)\\s*$",
-          "street": "Address\\s*\\.+\\s*([^\\r\\n]+?)\\s*$",
-          "postal_code": "Postcode\\s*\\.+\\s*(\\d{5})",
-          "items": "Contents\\s*\\.+\\s*([^\\r\\n]+?)\\s*$"
+          "tracking_number": "^Tracking ref\\s*\\.*\\s*([A-Z]{2}\\d{9}[A-Z]{2}|\\d{18}|SX\\d{12}|QC\\d{9})\\b",
+          "carrier": "^Courier\\s*\\.+\\s*([^\\r\\n]+?)\\s*$",
+          "buyer_name": "^Ship to\\s*\\.+\\s*([^\\r\\n]+?)\\s*$",
+          "street": "^Address\\s*\\.+\\s*([^\\r\\n]+?)\\s*$",
+          "postal_code": "^Postcode\\s*\\.+\\s*(\\d{5})\\b",
+          "items": "^Contents\\s*\\.+\\s*([^\\r\\n]+?)\\s*$"
         }
       }
     },
     {
       "kind": "tool_result",
       "label": "test_template #2: passed",
-      "atMs": 7934,
+      "atMs": 8839,
       "detail": {
         "passed": true,
-        "summary": "All 6 fields extracted and guard checks passed"
+        "summary": "All 6 fields extracted, guard checks passed, and 4 carrier variants parsed"
       }
     },
     {
       "kind": "tool_call",
       "label": "Model called StructuredOutput",
-      "atMs": 11560,
+      "atMs": 12625,
       "detail": {
         "fields": {
           "tracking_number": "KP512093445ZZ",
@@ -125,26 +125,26 @@
         "template": {
           "flags": "im",
           "patterns": {
-            "tracking_number": "Tracking ref\\s*\\.*\\s*([A-Z0-9]+)",
-            "carrier": "Courier\\s*\\.+\\s*([^\\r\\n]+?)\\s*$",
-            "buyer_name": "Ship to\\s*\\.+\\s*([^\\r\\n]+?)\\s*$",
-            "street": "Address\\s*\\.+\\s*([^\\r\\n]+?)\\s*$",
-            "postal_code": "Postcode\\s*\\.+\\s*(\\d{5})",
-            "items": "Contents\\s*\\.+\\s*([^\\r\\n]+?)\\s*$"
+            "tracking_number": "^Tracking ref\\s*\\.*\\s*([A-Z]{2}\\d{9}[A-Z]{2}|\\d{18}|SX\\d{12}|QC\\d{9})\\b",
+            "carrier": "^Courier\\s*\\.+\\s*([^\\r\\n]+?)\\s*$",
+            "buyer_name": "^Ship to\\s*\\.+\\s*([^\\r\\n]+?)\\s*$",
+            "street": "^Address\\s*\\.+\\s*([^\\r\\n]+?)\\s*$",
+            "postal_code": "^Postcode\\s*\\.+\\s*(\\d{5})\\b",
+            "items": "^Contents\\s*\\.+\\s*([^\\r\\n]+?)\\s*$"
           }
         },
-        "notes": "All six fields passed on the second test (the first failed because the m flag was missing). The tracking number fits the Kestrelpost S10 format (KP, 9 digits, ZZ)."
+        "notes": "Label-anchored patterns using the im flags; the tracking pattern covers all four carrier formats. The second test passed, including all four carrier variants."
       }
     },
     {
       "kind": "schema_check",
       "label": "Structured output matches the schema",
-      "atMs": 12103
+      "atMs": 13173
     },
     {
       "kind": "output",
       "label": "Draft returned, confidence 0.9",
-      "atMs": 12103
+      "atMs": 13173
     }
   ]
 }

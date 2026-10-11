@@ -206,7 +206,7 @@ export interface TemplateView {
   status: 'draft' | 'approved' | 'rejected';
   source: 'seed' | 'llm';
   spec: { flags: string; patterns: Record<FieldName, string> };
-  test_result: { passed: boolean; summary: string; fields: FieldTest[] } | null;
+  test_result: { passed: boolean; summary: string; fields: FieldTest[]; variants?: { carrier: string; tracking: string; pass: boolean }[] } | null;
   llm_run_id: number | null;
   created_at: string;
   approved_at: string | null;

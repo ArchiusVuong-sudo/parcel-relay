@@ -95,6 +95,15 @@ function Draft({ supplier, template, run }: { supplier: SupplierView; template: 
               {test?.passed ? <IconCheck /> : <IconX />} Template test {test?.passed ? 'passed' : 'failed'}
             </div>
             <p className="mt-1 text-xs opacity-80">{test?.summary}. The app ran it again itself, through the guard: length cap, one capture group, no backreferences, no nested quantifiers, no values copied from the email, 50 ms vm timeout.</p>
+            {test?.variants?.length ? (
+              <div className="mt-2 flex flex-wrap gap-1.5">
+                {test.variants.map((v) => (
+                  <Badge key={v.carrier} tone={v.pass ? 'emerald' : 'rose'} title={`Email copy with ${v.carrier} ${v.tracking}`}>
+                    {v.pass ? <IconCheck size={11} /> : <IconX size={11} />} {v.carrier}
+                  </Badge>
+                ))}
+              </div>
+            ) : null}
           </div>
         </div>
       </div>

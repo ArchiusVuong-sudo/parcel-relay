@@ -50,7 +50,8 @@ export function buildTestToolServer(body: string, trace: TraceStep[], startedAt:
         detail: { passed: result.passed, summary: result.summary },
       });
       const compact = result.fields.map((f) => ({ field: f.field, pass: f.pass, got: f.got, issues: f.issues.map((i) => i.message) }));
-      return { content: [{ type: 'text', text: JSON.stringify({ passed: result.passed, summary: result.summary, fields: compact }) }] };
+      const variants = result.variants.filter((v) => !v.pass).map((v) => ({ carrier: v.carrier, number: v.tracking, got: v.got }));
+      return { content: [{ type: 'text', text: JSON.stringify({ passed: result.passed, summary: result.summary, fields: compact, failedCarrierVariants: variants }) }] };
     },
   );
   return createSdkMcpServer({ name: TOOL_SERVER, version: '0.1.0', tools: [testTool] });

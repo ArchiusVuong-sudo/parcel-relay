@@ -21,6 +21,8 @@ Pattern rules (a guard rejects anything else):
 - no backreferences, no nested quantifiers such as (a+)+ or (?:\\w+\\s?)*
 - at most ${MAX_PATTERN_LENGTH} characters; flags may only use i, m, s
 
+This supplier may ship with any of the known carriers, so the tracking_number and carrier patterns must match every carrier format in the list, not only the one in this email. The test also runs your template on copies of the email with each other carrier's name and number swapped in.
+
 Before you answer, call ${TEST_TOOL} with your fields and patterns. If it reports a failure, fix the pattern and test again (at most two tests in total).
 Then return the structured output. confidence is your probability (0 to 1) that every field is right. Keep notes to one or two short sentences.`;
 

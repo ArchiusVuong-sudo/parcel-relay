@@ -65,6 +65,21 @@ describe('testTemplate', () => {
     });
   });
 
+  it('checks the recorded draft on a copy of the email for every known carrier', () => {
+    const r = testTemplate(rec.output.template, body, rec.output.fields);
+    expect(r.variants.map((v) => v.carrier)).toEqual(['Kestrelpost', 'Tidelane Ground', 'Swiftmere Express', 'Quillmoor Courier']);
+    expect(r.variants.every((v) => v.pass)).toBe(true);
+  });
+
+  it('fails a draft whose tracking pattern only fits the sample carrier format', () => {
+    const overfit = { ...rec.output.template, patterns: { ...rec.output.template.patterns, tracking_number: 'Tracking ref\\s*\\.+\\s*([A-Z]{2}\\d{9}[A-Z]{2})' } };
+    const r = testTemplate(overfit, body, rec.output.fields);
+    expect(r.fields.every((f) => f.pass)).toBe(true);
+    expect(r.passed).toBe(false);
+    expect(r.variants.filter((v) => !v.pass).map((v) => v.carrier)).toEqual(['Tidelane Ground', 'Swiftmere Express', 'Quillmoor Courier']);
+    expect(r.summary).toContain('Swiftmere Express');
+  });
+
   it('fails a draft that hardcodes a sample value', () => {
     const bad = { ...rec.output.template, patterns: { ...rec.output.template.patterns, buyer_name: '(Ilse Varga)' } };
     const r = testTemplate(bad, body, rec.output.fields);

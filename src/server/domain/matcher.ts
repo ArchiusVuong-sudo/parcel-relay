@@ -7,6 +7,8 @@ export const WEIGHTS = { name: 0.3, street: 0.25, postal: 0.2, items: 0.15, date
 export const AUTO_MATCH_MIN = 0.85;
 export const AUTO_MATCH_LEAD = 0.1;
 export const REVIEW_MIN = 0.4;
+/** Orders scoring below this are not worth showing as candidates. */
+export const CANDIDATE_MIN = 0.3;
 /** Ship date may trail the handling deadline by this much and still count. */
 const DATE_GRACE_MS = 48 * 3600_000;
 
@@ -135,7 +137,7 @@ export function scoreOrder(s: ShipmentFacts, o: OrderFacts): Candidate {
 
 export function matchShipment(s: ShipmentFacts, openOrders: OrderFacts[], limit = 3): MatchDecision {
   const ranked = openOrders.map((o) => scoreOrder(s, o)).sort((a, b) => b.score - a.score || a.orderId.localeCompare(b.orderId));
-  const candidates = ranked.slice(0, limit).filter((c) => c.score > 0);
+  const candidates = ranked.filter((c) => c.score >= CANDIDATE_MIN).slice(0, limit);
   const top = ranked[0];
   if (!top || top.score < REVIEW_MIN) return { kind: 'none', candidates };
   const second = ranked[1]?.score ?? 0;

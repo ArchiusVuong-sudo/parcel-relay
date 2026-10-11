@@ -1,4 +1,4 @@
-import { readdir, readFile } from 'node:fs/promises';
+import { mkdir, readdir, readFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import { PGlite, type Transaction } from '@electric-sql/pglite';
 import { MIGRATIONS_DIR } from '../paths.js';
@@ -9,6 +9,7 @@ export type Queryable = Pick<PGlite, 'query'> | Transaction;
 
 /** Opens PGlite (file-backed when a directory is given, in memory otherwise) and applies migrations. */
 export async function openDb(dataDir?: string): Promise<Db> {
+  if (dataDir) await mkdir(dataDir, { recursive: true });
   const db = dataDir ? new PGlite(dataDir) : new PGlite();
   await db.waitReady;
   await migrate(db);
